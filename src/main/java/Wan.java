@@ -7,7 +7,7 @@ public class Wan {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String input;
-        String[] storage = new String[100];
+        Task[] tasks = new Task[100];
         int numbers = 0;
 
         printLine();
@@ -24,15 +24,30 @@ public class Wan {
                 break;
             }else if(input.equals("list")) {
                 printLine();
+                System.out.println("    Here are the tasks in your list:");
                 for (int i = 0; i < numbers; i += 1) {
-                    System.out.print("    " + (i + 1) + ": ");
-                    System.out.println(storage[i]);
+                    System.out.print("    " + (i + 1) + ".");
+                    System.out.println(tasks[i].toString());
                 }
                 printLine();
-            }else{
+            }else if(input.startsWith("mark ")) {
+                int index = Integer.parseInt(input.substring(5)) - 1;
+                tasks[index].markAsDone();
                 printLine();
-                storage[numbers] = input;
+                System.out.println("    Nice! I've marked this task as done:");
+                System.out.println("      " + tasks[index].toString());
+                printLine();
+            }else if(input.startsWith("unmark ")) {
+                int index = Integer.parseInt(input.substring(7)) - 1;
+                tasks[index].markAsNotDone();
+                printLine();
+                System.out.println("    Nice! I've marked this task as not done yet:");
+                System.out.println("      " + tasks[index].toString());
+                printLine();
+            }else{
+                tasks[numbers] = new Task(input);
                 numbers += 1;
+                printLine();
                 System.out.println("    added: " + input);
                 printLine();
             }
