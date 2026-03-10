@@ -75,6 +75,13 @@ public class Parser {
                 storage.save(tasks.getAll());
                 break;
 
+            case "find":
+                if (parts.length < 2) {
+                    throw new WanException("Exception: find needs a keyword :(");
+                }
+                ui.showMatchingTasks(tasks, parts[1]);
+                break;
+
             default:
                 throw new WanException("Invalid input.");
         }

@@ -69,6 +69,19 @@ public class Ui {
         printLine();
     }
 
+    public void showMatchingTasks(TaskList tasks, String keyword) {
+        printLine();
+        System.out.println("     Here are the matching tasks in your list:");
+        int count = 1;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(keyword)) {
+                System.out.println("     " + count + "." + tasks.get(i));
+                count++;
+            }
+        }
+        printLine();
+    }
+
     public String readCommand() {
         return scanner.nextLine();
     }
