@@ -1,7 +1,9 @@
+import java.util.List;
 import java.util.Scanner;
 
 
 public class Wan {
+    private static final String FILE_PATH = "data" + java.io.File.separator + "wan.txt";
     public static void printLine(){
         System.out.println("    ____________________________________________________________");
     }
@@ -16,8 +18,15 @@ public class Wan {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Storage storage = new Storage(FILE_PATH);
+
+        List<Task> loaded = storage.load();
         Task[] tasks = new Task[100];
-        int numbers = 0;
+        int numbers = loaded.size();
+        for (int i = 0; i < numbers; i++) {
+            tasks[i] = loaded.get(i);
+        }
+
         boolean isRunning = true;
 
         printLine();
@@ -39,6 +48,7 @@ public class Wan {
                         tasks[numbers] = new Todo(parts[1]);
                         numbers += 1;
                         printTaskAdded(tasks[numbers - 1], numbers);
+                        storage.save(tasks, numbers);
                         break;
 
                     case "deadline":
@@ -52,6 +62,7 @@ public class Wan {
                         tasks[numbers] = new Deadline(deadlineParts[0], deadlineParts[1]);
                         numbers += 1;
                         printTaskAdded(tasks[numbers - 1], numbers);
+                        storage.save(tasks, numbers);
                         break;
 
                     case "event":
@@ -66,6 +77,7 @@ public class Wan {
                         tasks[numbers] = new Event(eventParts[0], timeParts[0], timeParts[1]);
                         numbers += 1;
                         printTaskAdded(tasks[numbers - 1], numbers);
+                        storage.save(tasks, numbers);
                         break;
 
                     case "list":
@@ -98,6 +110,7 @@ public class Wan {
                         }
                         System.out.println("      " + tasks[index].toString());
                         printLine();
+                        storage.save(tasks, numbers);
                         break;
 
                     case "bye":
