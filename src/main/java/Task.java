@@ -16,8 +16,12 @@ public class Task {
         this.isDone = true;
     }
 
-    public void markAsNotDone() {
+    public void markAsUnDone() {
         this.isDone = false;
+    }
+
+    public String toFileString() {
+        return (isDone ? "1" : "0") + " | " + description;
     }
 
     @Override
