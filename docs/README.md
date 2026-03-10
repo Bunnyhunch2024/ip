@@ -1,5 +1,5 @@
 
-Wan is a chatbot that helps you manage your tasks via a command-line interface.
+## Wan is a chatbot that helps you manage your tasks via a command-line interface.
 
 ## Features
 
