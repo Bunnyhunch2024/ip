@@ -63,7 +63,7 @@ public class Wan {
                         }
                         String[] eventParts = parts[1].split(" /from ", 2);
                         String[] timeParts = eventParts[1].split(" /to ", 2);
-                        tasks[numbers] = new Event(eventParts[0], eventParts[0], timeParts[1]);
+                        tasks[numbers] = new Event(eventParts[0], timeParts[0], timeParts[1]);
                         numbers += 1;
                         printTaskAdded(tasks[numbers - 1], numbers);
                         break;
@@ -84,6 +84,9 @@ public class Wan {
                             throw new WanException("Exception: mark/unmark needs a number :(");
                         }
                         int index = Integer.parseInt(parts[1]) - 1;
+                        if(index < 0||index >= numbers||tasks[index] == null){
+                            throw new WanException("Exception: task number doesn't exist :(");
+                        }
                         printLine();
                         if(command.equals("mark")){
                             tasks[index].markAsDone();
