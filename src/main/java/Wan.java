@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -22,19 +21,9 @@ public class Wan {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-<<<<<<< HEAD
-        ArrayList<Task> tasks = new ArrayList<>();
-=======
         Storage storage = new Storage(FILE_PATH);
+        ArrayList<Task> tasks = new ArrayList<>(storage.load());
 
-        List<Task> loaded = storage.load();
-        Task[] tasks = new Task[100];
-        int numbers = loaded.size();
-        for (int i = 0; i < numbers; i++) {
-            tasks[i] = loaded.get(i);
-        }
-
->>>>>>> branch-level-7
         boolean isRunning = true;
 
         printLine();
@@ -53,15 +42,9 @@ public class Wan {
                         if(parts.length < 2){
                             throw new WanException("Exception: todo needs a description :(");
                         }
-<<<<<<< HEAD
                         tasks.add(new Todo(parts[1]));
                         printTaskStatus(tasks.get(tasks.size() - 1), tasks.size(), "add");
-=======
-                        tasks[numbers] = new Todo(parts[1]);
-                        numbers += 1;
-                        printTaskAdded(tasks[numbers - 1], numbers);
-                        storage.save(tasks, numbers);
->>>>>>> branch-level-7
+                        storage.save(tasks);
                         break;
 
                     case "deadline":
@@ -72,15 +55,10 @@ public class Wan {
                             throw new WanException("Exception: deadline needs a /by :(");
                         }
                         String[] deadlineParts = parts[1].split(" /by ", 2);
-<<<<<<< HEAD
                         tasks.add(new Deadline(deadlineParts[0], deadlineParts[1]));
                         printTaskStatus(tasks.get(tasks.size() - 1), tasks.size(), "add");
-=======
-                        tasks[numbers] = new Deadline(deadlineParts[0], deadlineParts[1]);
-                        numbers += 1;
-                        printTaskAdded(tasks[numbers - 1], numbers);
-                        storage.save(tasks, numbers);
->>>>>>> branch-level-7
+                        storage.save(tasks);
+
                         break;
 
                     case "event":
@@ -92,18 +70,11 @@ public class Wan {
                         }
                         String[] eventParts = parts[1].split(" /from ", 2);
                         String[] timeParts = eventParts[1].split(" /to ", 2);
-<<<<<<< HEAD
-                        tasks[numbers] = new Event(eventParts[0], timeParts[0], timeParts[1]);
-                        numbers += 1;
-                        printTaskAdded(tasks[numbers - 1], numbers);
-<<<<<<< HEAD
-=======
+
                         tasks.add(new Event(eventParts[0], timeParts[0], timeParts[1]));
                         printTaskStatus(tasks.get(tasks.size() - 1), tasks.size(), "add");
->>>>>>> branch-level-6
-=======
-                        storage.save(tasks, numbers);
->>>>>>> branch-level-7
+                        storage.save(tasks);
+
                         break;
 
                     case "list":
@@ -121,21 +92,11 @@ public class Wan {
                             throw new WanException("Exception: mark/unmark needs a number :(");
                         }
                         int index = Integer.parseInt(parts[1]) - 1;
-<<<<<<< HEAD
-                        if(index < 0||index >= numbers||tasks[index] == null){
-                            throw new WanException("Exception: task number doesn't exist :(");
-                        }
-                        printLine();
-                        if(command.equals("mark")){
-                            tasks[index].markAsDone();
-=======
-                        if (index < 0 || index >= tasks.size()) {
-                            throw new WanException("Exception: task number doesn't exist :(");
-                        }
+
                         if (command.equals("mark")) {
                             printLine();
                             tasks.get(index).markAsDone();
->>>>>>> branch-level-6
+
                             System.out.println("    Nice! I've marked this task as done:");
                             System.out.println("      " + tasks.get(index));
                             printLine();
@@ -149,12 +110,10 @@ public class Wan {
                             Task removedTask = tasks.remove(index);
                             printTaskStatus(removedTask, tasks.size(), "delete");
                         }
-<<<<<<< HEAD
-=======
-                        System.out.println("      " + tasks[index].toString());
-                        printLine();
-                        storage.save(tasks, numbers);
->>>>>>> branch-level-7
+
+                        System.out.println("      " + tasks.get(index));
+                        storage.save(tasks);
+
                         break;
 
                     case "bye":

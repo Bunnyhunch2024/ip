@@ -13,7 +13,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public void save(Task[] tasks, int count) {
+    public void save(ArrayList<Task> tasks) {
         try {
             File file = new File(filePath);
             File parentDir = file.getParentFile();
@@ -21,8 +21,8 @@ public class Storage {
                 parentDir.mkdirs();
             }
             FileWriter writer = new FileWriter(file);
-            for (int i = 0; i < count; i++) {
-                writer.write(tasks[i].toFileString() + System.lineSeparator());
+            for (Task task : tasks) {
+                writer.write(task.toFileString() + System.lineSeparator());
             }
             writer.close();
         } catch (IOException e) {
@@ -35,7 +35,7 @@ public class Storage {
         File file = new File(filePath);
 
         if (!file.exists()) {
-            return taskList; // first run — fine to start fresh
+            return taskList;
         }
 
         try {
@@ -62,7 +62,7 @@ public class Storage {
         boolean isDone = p[1].trim().equals("1");
         String desc    = p[2].trim();
 
-        Task task = null;
+        Task task;
         switch (type) {
             case "T":
                 task = new Todo(desc);
