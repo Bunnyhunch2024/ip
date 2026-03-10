@@ -77,7 +77,7 @@ public class Parser {
 
             case "find":
                 if (parts.length < 2) {
-                    throw new WanException("Exception: find needs a keyword :(");
+                    throw new WanException("Exception: needs a keyword pls type it :(");
                 }
                 ui.showMatchingTasks(tasks, parts[1]);
                 break;
