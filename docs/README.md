@@ -1,30 +1,45 @@
-# Duke User Guide
 
-// Update the title above to match the actual product name
+Wan is a chatbot that helps you manage your tasks via a command-line interface.
 
-// Product screenshot goes here
+## Features
 
-// Product intro goes here
+### Add a Todo
+`todo DESCRIPTION`
 
-## Adding deadlines
+Example: `todo read book`
 
-// Describe the action and its outcome.
+### Add a Deadline
+`deadline DESCRIPTION /by DATE`
 
-// Give examples of usage
+Example: `deadline return book /by June 6th`
 
-Example: `keyword (optional arguments)`
+### Add an Event
+`event DESCRIPTION /from START /to END`
 
-// A description of the expected outcome goes here
+Example: `event project meeting /from Mon 2pm /to 4pm`
 
-```
-expected output
-```
+### List all tasks
+`list`
 
-## Feature ABC
+### Mark a task as done
+`mark INDEX`
 
-// Feature details
+Example: `mark 1`
 
+### Unmark a task
+`unmark INDEX`
 
-## Feature XYZ
+Example: `unmark 1`
 
-// Feature details
+### Delete a task
+`delete INDEX`
+
+Example: `delete 1`
+
+### Find tasks by keyword
+`find KEYWORD`
+
+Example: `find book`
+
+### Exit
+`bye`
